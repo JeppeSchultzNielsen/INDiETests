@@ -23,5 +23,16 @@ int main(){
     wc ->loopOverFile("UnpackedINDiETests/Run012.root");
     wc -> fitWalkTH1s();
     wc ->saveHistograms("output/walkCorrecter.root");
+    wc ->saveVectors("output/walkCorrecterVectors.txt");
+    wc ->loadVectors("output/walkCorrecterVectors.txt");
+    wc -> doMinimization();
+    wc ->writeWalkPars("output/walkCorrecterPars.txt");
+    wc = new WalkCorrector();
+    wc ->readWalkPars("output/walkCorrecterPars.txt");
+    wc -> loopOverFile("UnpackedINDiETests/Run012.root");
+    wc -> fitWalkTH1s();
+    wc ->saveHistograms("output/walkCorrecter2.root");
+
+    return 0;
 
 }

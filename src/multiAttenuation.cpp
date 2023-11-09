@@ -35,10 +35,11 @@ void MultiAttenuation::createMultiGraph(){
 }
 
 void MultiAttenuation::saveMultiGraph(TString fileName){
+    //create new rootfile and save the graphs
     TFile *f = new TFile(fileName, "RECREATE");
-    allGraph -> Write();
-    aGraph -> Write();
-    bGraph -> Write();
+    allGraph -> Write("allGraph");
+    aGraph -> Write("aGraph");
+    bGraph -> Write("bGraph");
     f -> Close();
 }
 
