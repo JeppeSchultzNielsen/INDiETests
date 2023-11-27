@@ -42,8 +42,8 @@ double AttenuationPositioner::getPosition(double qdc_r, double qdc_l) {
     double gamma = (aParams[2]*qdc_l + bParams[2]*qdc_l*qdc_l);
     double delta = beta*beta - 4*alpha*gamma;
     if(delta < 0){
-        cout << "Delta is negative, returning -1" << endl;
-        return -1;
+        cout << "Delta is negative, returning -1000" << endl;
+        return -1000;
     }
     double x1 = (-beta + sqrt(delta))/(2*gamma);
     double x2 = (-beta - sqrt(delta))/(2*gamma);
@@ -61,6 +61,7 @@ void AttenuationPositioner::attenuationTest(TString fileName, TString saveTo) {
     tree->SetBranchAddress("Time_INDiE", t_INDiE);
 
     auto attenuationHist = new TH2D("Pos vs QDC", "Pos vs QDC", 100, -100, 100, 100, 0, 300e3);
+    auto positionHist = new TH1D("Pos spectrum", "Pos spectrum",500, -100, 100);
 
     int nEntries = tree->GetEntries();
     for(int i = 0; i < nEntries; i++){
@@ -69,11 +70,13 @@ void AttenuationPositioner::attenuationTest(TString fileName, TString saveTo) {
             //getPosition(142500,81600);
             double x = getPosition(en_INDiE[1], en_INDiE[0]);
             attenuationHist ->Fill(x, en_INDiE[1]);
+            positionHist -> Fill(x);
         }
     }
 
     //save histogram
     TFile* outFile = TFile::Open(saveTo, "RECREATE");
     attenuationHist->Write();
+    positionHist -> Write();
     outFile->Close();
 }
