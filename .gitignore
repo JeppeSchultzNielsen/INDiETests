@@ -1,2 +1,7 @@
 # Project exclude paths
 /cmake-build-debug/
+/build/
+/indieTestsTraces/
+/indieTestsTracesLeft/
+/indieTestsUnpacked2/
+/UnpackedINDiETests/
