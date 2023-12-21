@@ -26,6 +26,34 @@ void Positioner::loadParams(TString fileName){
     }
 }
 
+void Positioner::loadSpeedParams(TString fileName){
+    //load the parameters from a txt file
+    ifstream file;
+    file.open(fileName);
+    double param;
+    while(file >> param){
+        speeds.push_back(param);
+    }
+}
+
+void Positioner::loadSigmaParams(TString fileName){
+    //load the parameters from a txt file
+    ifstream file;
+    file.open(fileName);
+    double param;
+    while(file >> param){
+        sigmas.push_back(param);
+    }
+}
+
+double Positioner::getSpeed(int bar){
+    return speeds[bar];
+}
+
+double Positioner::getSigma(int bar){
+    return sigmas[bar];
+}
+
 double Positioner::getVelocity(double tDiff) {
     tDiff = abs(tDiff);
     /*if(tDiff > 8){ //8 ns is maximal time difference - when the source is at the edge of the detector

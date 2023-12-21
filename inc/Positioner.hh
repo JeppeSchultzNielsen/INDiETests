@@ -14,6 +14,8 @@ using namespace std;
 class Positioner {
 public:
     vector<double> params;
+    vector<double> speeds;
+    vector<double> sigmas;
 
     Positioner(){}
 
@@ -22,6 +24,14 @@ public:
     void saveParams(TString fileName);
 
     void loadParams(TString fileName);
+
+    void loadSpeedParams(TString fileName);
+
+    void loadSigmaParams(TString fileName);
+
+    double getSpeed(int bar);
+
+    double getSigma(int bar);
 
     double getPosition(double tDiff);
 
